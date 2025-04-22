@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Panel de Administración</title>
+  <!-- Asegúrate de que el script de supabase-client.js esté bien cargado -->
+  <script type="module" src="supabase-client.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f6f9;
+    }
+  
+    header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+  
+    header h1 {
+      font-size: 36px;
+      margin: 0;
+    }
+  
+    header p {
+      font-size: 16px;
+      margin: 5px 0;
+    }
+  
+    .dashboard {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      padding: 20px;
+    }
+  
+    .table-container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 800px;
+      flex: 1;
+      margin: 10px;
+    }
+  
+    h2 {
+      font-size: 24px;
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+  
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border: 1px solid #ddd;
+      font-size: 14px;
+    }
+  
+    th {
+      background-color: #3498db;
+      color: white;
+    }
+  
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+  
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+  
+    img {
+      border-radius: 5px;
+      max-width: 50px;
+      max-height: 50px;
+    }
+  
+    .error-message {
+      color: red;
+      text-align: center;
+      font-size: 14px;
+      margin-top: 20px;
+    }
+  
+    @media (max-width: 768px) {
+      .dashboard {
+        flex-direction: column;
+      }
+  
+      .table-container {
+        width: 100%;
+      }
+    }
+  </style>
+  
+</head>
+<body>
+
+<header>
+  <h1>Panel de Administración</h1>
+  <p>Acceso exclusivo para administradores</p>
+  <a href="addproduct.html">Agregar productos</a>
+</header>
+
+<div class="dashboard">
+  <div class="table-container">
+    <h2>🛒 Productos</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Precio</th>
+          <th>Imagen</th>
+          <th>Creado</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-productos"></tbody>
+    </table>
+  </div>
+
+  <div class="table-container">
+    <h2>👥 Usuarios</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Usuario</th>
+          <th>Contraseña</th>
+          <th>Creado</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-usuarios"></tbody>
+    </table>
+  </div>
+</div>
+
+<script type="module">
+  import { supabase } from './supabase-client.js';  // Importa la instancia de supabase
+
+  // Función para cargar los productos
+  async function cargarProductos() {
+    const { data, error } = await supabase.from('productos').select('*');
+    if (error) {
+      console.error('Error al obtener productos:', error.message);
+      document.getElementById("tabla-productos").innerHTML = `<tr><td colspan="6">Error al cargar productos: ${error.message}</td></tr>`;
+      return;
+    }
+
+    const tabla = document.getElementById('tabla-productos');
+    tabla.innerHTML = '';
+    data.forEach(p => {
+      tabla.innerHTML += `
+        <tr>
+          <td>${p.id}</td>
+          <td>${p.nombre}</td>
+          <td>${p.descripcion}</td>
+          <td>$${p.precio}</td>
+          <td><img src="${p.imagen_url}" width="50" /></td>
+          <td>${p.created_at}</td>
+        </tr>
+      `;
+    });
+  }
+
+  // Función para cargar los usuarios
+  async function cargarUsuarios() {
+    const { data, error } = await supabase.from('usuarios').select('*');
+    if (error) {
+      console.error('Error al obtener usuarios:', error.message);
+      document.getElementById("tabla-usuarios").innerHTML = `<tr><td colspan="6">Error al cargar usuarios: ${error.message}</td></tr>`;
+      return;
+    }
+
+    const tabla = document.getElementById('tabla-usuarios');
+    tabla.innerHTML = '';
+    data.forEach(u => {
+      tabla.innerHTML += `
+        <tr>
+          <td>${u.id}</td>
+          <td>${u.nombre}</td>
+          <td>${u.email}</td>
+          <td>${u.usuario}</td>
+          <td>${u.contrasena}</td>
+          <td>${u.creado_en}</td>
+        </tr>
+      `;
+    });
+  }
+
+  // Ejecutar las funciones de carga
+  cargarProductos();
+  cargarUsuarios();
+</script>
+
+</body>
+</html>

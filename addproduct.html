@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Agregar Producto</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      animation: fondoAnimado 10s ease-in-out infinite alternate;
+      background-size: 400% 400%;
+    }
+
+    @keyframes fondoAnimado {
+      0% {
+        background: linear-gradient(45deg, #ff5722, #ff9800);
+      }
+      50% {
+        background: linear-gradient(45deg, #ff7043, #ffc107);
+      }
+      100% {
+        background: linear-gradient(45deg, #f44336, #ff9800);
+      }
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px #880808;
+    }
+
+    form {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 2rem;
+      border-radius: 15px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+
+    input, textarea, button {
+      width: 100%;
+      padding: 0.8rem;
+      margin: 0.5rem 0;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+    }
+
+    input, textarea {
+      background-color: rgba(255, 255, 255, 0.85);
+      color: #333;
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: #666;
+    }
+
+    button {
+      background-color: #ff5722;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e64a19;
+    }
+  </style>
+</head>
+<body>
+  <h2>Agregar Producto</h2>
+  <form id="product-form">
+    <input type="text" id="nombre" placeholder="Nombre" required /><br />
+    <textarea id="descripcion" placeholder="Descripción" required></textarea><br />
+    <input type="number" id="precio" placeholder="Precio" step="0.01" required /><br />
+    <input type="file" id="imagen" accept="image/*" required /><br />
+    <button type="submit">Agregar</button>
+  </form>
+
+  <script type="module">
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js'
+
+    const supabaseUrl = 'https://rsufdpyzwhaqzaienrhk.supabase.co'
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJzdWZkcHl6d2hhcXphaWVucmhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDUyNjk1MDEsImV4cCI6MjA2MDg0NTUwMX0.8PX9UQz61PoZpF5fSTWy8vMisJvajMl4m9dpy66-4Z8'
+    const supabase = createClient(supabaseUrl, supabaseKey)
+
+    const form = document.getElementById('product-form')
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault()
+
+      const nombre = document.getElementById('nombre').value
+      const descripcion = document.getElementById('descripcion').value
+      const precio = parseFloat(document.getElementById('precio').value)
+      const imagenFile = document.getElementById('imagen').files[0]
+
+      if (!imagenFile) {
+        alert("Debes subir una imagen.")
+        return
+      }
+
+      const fileName = `${Date.now()}_${imagenFile.name}`
+      const { data: imageData, error: imageError } = await supabase.storage
+        .from('productos')
+        .upload(fileName, imagenFile)
+
+      if (imageError) {
+        alert('Error al subir la imagen: ' + imageError.message)
+        return
+      }
+
+      const imageUrl = `${supabaseUrl}/storage/v1/object/public/imagenes/${fileName}`
+
+      const { data, error } = await supabase.from('productos').insert([{
+        nombre,
+        descripcion,
+        precio,
+        imagen_url: imageUrl
+      }])
+
+      if (error) {
+        alert('Error al guardar en la base de datos: ' + error.message)
+      } else {
+        alert('Producto agregado con éxito')
+        window.location.href = 'header.html'
+      }
+    })
+  </script>
+</body>
+</html>

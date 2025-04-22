@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Header - MercApp</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+
+    header {
+      background-color: #d4141a;
+      color: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.8em;
+      letter-spacing: 0.5px;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .search-bar {
+      flex: 1;
+      margin: 0 30px;
+      display: flex;
+      max-width: 600px;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 12px 20px;
+      border: none;
+      outline: none;
+      border-radius: 30px 0 0 30px;
+      font-size: 1em;
+      transition: all 0.3s ease;
+    }
+
+    .search-bar input:focus {
+      box-shadow: 0 0 0 2px rgba(255,255,255,0.3);
+    }
+
+    .search-bar button {
+      padding: 12px 20px;
+      border: none;
+      background-color: #b01313;
+      color: white;
+      cursor: pointer;
+      border-radius: 0 30px 30px 0;
+      transition: all 0.3s ease;
+    }
+
+    .search-bar button:hover {
+      background-color: #9a0f0f;
+      transform: scale(1.02);
+    }
+
+    .icons {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .icons a {
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .icons a:hover {
+      background-color: rgba(255,255,255,0.1);
+      transform: translateY(-2px);
+    }
+
+    .icons a i {
+      transition: transform 0.3s ease;
+    }
+
+    .icons a:hover i {
+      transform: scale(1.1);
+    }
+
+    nav {
+      background-color: #c11218;
+      padding: 12px 30px;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    nav a:hover {
+      background-color: rgba(255,255,255,0.1);
+      transform: translateY(-2px);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: white;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 60%;
+      left: 20%;
+    }
+
+    @media (max-width: 768px) {
+      .top-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+        padding: 15px;
+      }
+
+      .search-bar {
+        margin: 10px 0;
+      }
+
+      nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+      }
+
+      .icons {
+        justify-content: center;
+      }
+    }
+
+    
+    /* Animación de pulsación para el carrito */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .cart-icon:hover {
+      animation: pulse 0.5s ease;
+    }
+    footer {
+      background-color: #d4141a;
+      color: white;
+      padding: 40px 20px 20px;
+      margin-top: 60px;
+      font-size: 0.95em;
+    }
+
+    .footer-container {
+      max-width: 1300px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-size: 1.5em;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .footer-links {
+      margin-bottom: 15px;
+    }
+
+    .footer-links a {
+      margin: 0 12px;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #ffdddd;
+    }
+
+    .footer-social a {
+      color: white;
+      margin: 0 10px;
+      font-size: 1.3em;
+      transition: transform 0.3s ease;
+    }
+
+    .footer-social a:hover {
+      transform: scale(1.2);
+    }
+
+    .footer-copy {
+      margin-top: 20px;
+      font-size: 0.9em;
+      color: #f1f1f1;
+    }
+    /* From Uiverse.io by joe-watson-sbf */ 
+    .flip-card {
+    background-color: transparent;
+    width: 190px;
+    height: 254px;
+    perspective: 1000px;
+    font-family: sans-serif;
+    }
+
+    .title {
+    font-size: 1.5em;
+    font-weight: 900;
+    text-align: center;
+    margin: 0;
+    }
+
+    .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    }
+
+    .flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+    }
+
+    .flip-card-front, .flip-card-back {
+    box-shadow: 0 8px 14px 0 rgba(0,0,0,0.2);
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border: 1px solid coral;
+    border-radius: 1rem;
+    }
+
+    .flip-card-front {
+    background: linear-gradient(120deg, bisque 60%, rgb(255, 231, 222) 88%,
+        rgb(255, 211, 195) 40%, rgba(255, 127, 80, 0.603) 48%);
+    color: coral;
+    }
+
+    .flip-card-back {
+    background: linear-gradient(120deg, rgb(255, 174, 145) 30%, coral 88%,
+        bisque 40%, rgb(255, 185, 160) 78%);
+    color: white;
+    transform: rotateY(180deg);
+    }
+    #descripcion-estudiante {
+    min-height: 20px; /* Previene que la altura cambie bruscamente */
+    transition: all 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="top-bar">
+      <div class="logo">🛒 MercApp</div>
+
+      <div class="search-bar">
+        <input type="text" placeholder="Escribe lo que buscas..." id="searchInput">
+        <button><i class="fas fa-search"></i></button>
+      </div>
+
+      <div class="icons">
+        <a href="login.html"><i class="fas fa-user"></i> Ingresar</a>
+        <a href="#" class="cart-icon"><i class="fas fa-shopping-cart"></i></a>
+      </div>
+    </div>
+
+    <nav>
+      <a href="header.html">Principal</a>
+      <a href="producto.html">Productos</a>
+      <a href="politica.html">Política & privacidad</a>
+      <a href="nosotros.html">sobre nosotros</a>
+      <a href="addproduct.html">Agregar productos</a>
+    </nav>
+  </header>
+
+
+  <section style="max-width: 1300px; margin: 50px auto; padding: 0 20px;">
+    <h2 style="font-size: 2em; margin-bottom: 20px; color: #333; text-align:center;">Nuestro equipo</h2>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
+        
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <img src="integrantes/tueros.png" alt="Tuero" style="width: 100%; height: 100%; border-radius: 1rem; object-fit: cover;">
+          </div>
+          <div class="flip-card-back">
+            <p class="title">Tueros</p>
+          </div>
+          <div class="flip-card" data-descripcion="Tueros es un estudiante comprometido y apasionado por la tecnología, con un enfoque especial en el diseño y la gestión de bases de datos. Posee un sólido entendimiento de la estructura, normalización y optimización de bases de datos relacionales, además de experiencia práctica en el manejo de herramientas como MySQL y PostgreSQL. Su capacidad para organizar la información de manera eficiente y segura lo convierte en un elemento clave para cualquier equipo de desarrollo. Siempre está en constante aprendizaje, buscando nuevas formas de mejorar el rendimiento y la integridad de los datos en los sistemas que implementa."></div>
+        </div>
+      </div>
+  
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <img src="integrantes/cassey.png" alt="Yan" style="width: 100%; height: 100%; border-radius: 1rem; object-fit: cover;">
+          </div>
+          <div class="flip-card-back">
+            <p class="title">Joaquin</p>
+          </div>
+          <div class="flip-card" data-descripcion="cassey es un desarrollador con una fuerte orientación hacia el backend, especializado en la creación de aplicaciones robustas y escalables. Tiene un profundo conocimiento de lenguajes de programación como PHP, Python y Node.js, y una gran experiencia trabajando con bases de datos, APIs RESTful y servicios en la nube. A lo largo de su carrera, ha diseñado e implementado soluciones que permiten a las aplicaciones manejar grandes volúmenes de datos de manera eficiente. Su enfoque en la optimización y seguridad del código lo convierte en un pilar fundamental en proyectos que requieren alta disponibilidad y rendimiento."></div>
+        </div>
+      </div>
+  
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <img src="integrantes/wilson.jpg" alt="Wilson" style="width: 100%; height: 100%; border-radius: 1rem; object-fit: cover;">
+          </div>
+          <div class="flip-card-back">
+            <p class="title">Wilson</p>
+          </div>
+          <div class="flip-card" data-descripcion="Wilson es un experto en desarrollo frontend con una pasión por crear interfaces de usuario atractivas y funcionales. Con un dominio profundo de tecnologías como HTML, CSS, JavaScript, y frameworks como React y Vue.js, se especializa en construir experiencias web interactivas y fáciles de usar. Su atención al detalle y enfoque en la usabilidad lo han llevado a diseñar sitios y aplicaciones que no solo son visualmente impactantes, sino también intuitivos para el usuario. Wilson se asegura de que cada componente en el frontend esté optimizado para ofrecer el mejor rendimiento y una experiencia fluida en todos los dispositivos."></div>
+        </div>
+      </div>
+  
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <img src="integrantes/ascurra.png" alt="Ascurra" style="width: 100%; height: 100%; border-radius: 1rem; object-fit: cover;">
+          </div>
+          <div class="flip-card-back">
+            <p class="title">Ascurra</p>
+          </div>
+        </div>
+        <div class="flip-card" data-descripcion="Es un entusiasta del desarrollo web con conocimientos en diseño de interfaces y optimización de la experiencia del usuario. Siempre está explorando nuevas tendencias en tecnología y diseño para implementar soluciones innovadoras que mejoren la interacción del usuario con las aplicaciones web. Tiene un enfoque creativo para resolver problemas y le gusta crear diseños modernos que se adapten perfectamente a las necesidades de los usuarios, priorizando siempre la accesibilidad y la simplicidad."></div>
+      </div>
+    </div>
+    <p id="descripcion-estudiante" style="text-align: center; font-size: 18px; color: #333; margin-top: 20px;"></p>
+  </section>
+
+
+  <script>
+    // Interacción para el buscador
+    document.getElementById('searchInput').addEventListener('focus', function() {
+      this.placeholder = 'Buscar productos...';
+    });
+    
+    document.getElementById('searchInput').addEventListener('blur', function() {
+      this.placeholder = 'Escribe lo que buscas...';
+    });
+
+  </script>
+  
+  <script type="module" src="supabase-client.js"></script>
+  <script type="module" src="productos2.js"></script>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-logo">🛒 MercApp</div>
+      <div class="footer-links">
+        <a href="#">Contacto</a>
+        <a href="#">Términos de uso</a>
+        <a href="politica.html">Política de privacidad</a>
+        <a href="#">Ayuda</a>
+      </div>
+      <div class="footer-social">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
+      <div class="footer-copy">
+        &copy; 2025 MercApp. Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+<script>
+    const cards = document.querySelectorAll('.flip-card');
+    const descripcion = document.getElementById('descripcion-estudiante');
+  
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        descripcion.textContent = card.getAttribute('data-descripcion');
+      });
+      card.addEventListener('mouseleave', () => {
+        descripcion.textContent = '';
+      });
+    });
+</script>
+</body>
+</html>

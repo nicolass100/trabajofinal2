@@ -1,0 +1,453 @@
+  <!DOCTYPE html>
+  <html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Header - MercApp</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+      }
+
+      header {
+    background-color: #d4141a;
+    color: white;
+    padding: 15px 30px;
+    position: relative;
+    z-index: 1000;
+  }
+
+  .top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+
+  .logo:hover {
+    transform: scale(1.05);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 20px;
+    transition: max-height 0.3s ease;
+  }
+
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 10px;
+    transition: background 0.3s ease;
+  }
+
+  .nav-links a:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .icons a {
+    margin-left: 15px;
+    color: white;
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+  }
+
+  .icons a:hover {
+    transform: scale(1.2);
+  }
+
+  .menu-toggle {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    .nav-links {
+      flex-direction: column;
+      width: 100%;
+      max-height: 0;
+      overflow: hidden;
+      background-color: #c11218;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+
+    .nav-links.open {
+      max-height: 300px;
+      padding: 10px 0;
+    }
+
+    .menu-toggle {
+      display: block;
+    }
+  }
+
+      .search-bar {
+        flex: 1;
+        margin: 0 30px;
+        display: flex;
+        max-width: 600px;
+      }
+
+      .search-bar input {
+        width: 100%;
+        padding: 12px 20px;
+        border: none;
+        outline: none;
+        border-radius: 30px 0 0 30px;
+        font-size: 1em;
+        transition: all 0.3s ease;
+      }
+
+      .search-bar input:focus {
+        box-shadow: 0 0 0 2px rgba(255,255,255,0.3);
+      }
+
+      .search-bar button {
+        padding: 12px 20px;
+        border: none;
+        background-color: #b01313;
+        color: white;
+        cursor: pointer;
+        border-radius: 0 30px 30px 0;
+        transition: all 0.3s ease;
+      }
+
+      .search-bar button:hover {
+        background-color: #9a0f0f;
+        transform: scale(1.02);
+      }
+
+      .icons {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+      }
+
+      .icons a {
+        color: white;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 600;
+        padding: 8px 12px;
+        border-radius: 20px;
+        transition: all 0.3s ease;
+      }
+
+      .icons a:hover {
+        background-color: rgba(255,255,255,0.1);
+        transform: translateY(-2px);
+      }
+
+      .icons a i {
+        transition: transform 0.3s ease;
+      }
+
+      .icons a:hover i {
+        transform: scale(1.1);
+      }
+
+      nav {
+        background-color: #c11218;
+        padding: 12px 30px;
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+        flex-wrap: wrap;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        padding: 8px 12px;
+        border-radius: 20px;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      nav a:hover {
+        background-color: rgba(255,255,255,0.1);
+        transform: translateY(-2px);
+      }
+
+      nav a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: white;
+        transition: all 0.3s ease;
+      }
+
+      nav a:hover::after {
+        width: 60%;
+        left: 20%;
+      }
+
+      @media (max-width: 768px) {
+        .top-bar {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 15px;
+          padding: 15px;
+        }
+
+        .search-bar {
+          margin: 10px 0;
+        }
+
+        nav {
+          flex-direction: column;
+          align-items: center;
+          gap: 10px;
+          padding: 10px;
+        }
+
+        .icons {
+          justify-content: center;
+        }
+      }
+
+      /* Carrusel de imágenes */
+      .carousel {
+        position: relative;
+        width: 1400px;
+        height: 600px;
+        margin: 30px auto; /* Centrado */
+        overflow: hidden;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .carousel-images {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        height: 100%;
+      }
+
+      .carousel-images img {
+        width: 1400px;
+        height: 600px;
+        object-fit: cover;
+        flex-shrink: 0;
+      }
+
+      .carousel button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        font-size: 2em;
+        z-index: 10;
+      }
+
+      .prev {
+        left: 0;
+      }
+
+      .next {
+        right: 0;
+      }
+
+      /* Animación de pulsación para el carrito */
+      @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+      }
+
+      .cart-icon:hover {
+        animation: pulse 0.5s ease;
+      }
+      footer {
+        background-color: #d4141a;
+        color: white;
+        padding: 40px 20px 20px;
+        margin-top: 60px;
+        font-size: 0.95em;
+      }
+
+      .footer-container {
+        max-width: 1300px;
+        margin: auto;
+        text-align: center;
+      }
+
+      .footer-logo {
+        font-size: 1.5em;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+
+      .footer-links {
+        margin-bottom: 15px;
+      }
+
+      .footer-links a {
+        margin: 0 12px;
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        color: #ffdddd;
+      }
+
+      .footer-social a {
+        color: white;
+        margin: 0 10px;
+        font-size: 1.3em;
+        transition: transform 0.3s ease;
+      }
+
+      .footer-social a:hover {
+        transform: scale(1.2);
+      }
+
+      .footer-copy {
+        margin-top: 20px;
+        font-size: 0.9em;
+        color: #f1f1f1;
+      }
+    </style>
+  </head>
+  <body>
+
+    <header>
+      <div class="top-bar">
+        <div class="logo">🛒 MercApp</div>
+        <div class="menu-toggle" id="menuToggle">
+          <i class="fas fa-bars"></i>
+        </div>
+        <nav class="nav-links" id="navLinks">
+          <a href="header.html">Inicio</a>
+          <a href="producto.html">Productos</a>
+          <a href="politica.html">Política</a>
+          <a href="nosotros.html">Nosotros</a>
+          <a href="addproduct.html">Agregar</a>
+        </nav>
+        <div class="icons">
+          <a href="login.html" title="Ingresar"><i class="fas fa-user"></i></a>
+          <a href="#" title="Carrito"><i class="fas fa-shopping-cart"></i></a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Carrusel de imágenes -->
+    <section class="carousel">
+      <div class="carousel-images">
+        <img src="principal/1.jpg" alt="Imagen 1">
+        <img src="principal/2.jpg" alt="Imagen 2">
+        <img src="principal/3.jpg" alt="Imagen 3">
+        <img src="principal/4.jpg" alt="Imagen 4">
+      </div>
+      <button class="prev">&#10094;</button>
+      <button class="next">&#10095;</button>
+    </section>
+
+    <section style="max-width: 1300px; margin: 50px auto; padding: 0 20px;">
+      <h2 style="font-size: 2em; margin-bottom: 20px; color: #333;">Productos destacados</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;">
+        
+      </div>
+      
+    </section>
+
+    <script>
+      // Interacción para el buscador
+      document.getElementById('searchInput').addEventListener('focus', function() {
+        this.placeholder = 'Buscar productos...';
+      });
+      
+      document.getElementById('searchInput').addEventListener('blur', function() {
+        this.placeholder = 'Escribe lo que buscas...';
+      });
+
+      // Carrusel de imágenes
+      let index = 0;
+      const images = document.querySelectorAll('.carousel-images img');
+      const totalImages = images.length;
+
+      const prevButton = document.querySelector('.prev');
+      const nextButton = document.querySelector('.next');
+
+      function changeImage() {
+        if (index >= totalImages) {
+          index = 0;
+        } else if (index < 0) {
+          index = totalImages - 1;
+        }
+
+        const offset = -index * 100;
+        document.querySelector('.carousel-images').style.transform = `translateX(${offset}%)`;
+      }
+
+      prevButton.addEventListener('click', function() {
+        index--;
+        changeImage();
+      });
+
+      nextButton.addEventListener('click', function() {
+        index++;
+        changeImage();
+      });
+
+      // Cambiar la imagen automáticamente cada 3 segundos
+      setInterval(function() {
+        index++;
+        changeImage();
+      }, 3000);
+    
+    </script>
+    <script type="module" src="supabase-client.js"></script>
+    <script type="module" src="productos.js"></script>
+
+    <footer>
+      <div class="footer-container">
+        <div class="footer-logo">🛒 MercApp</div>
+        <div class="footer-links">
+          <a href="#">Contacto</a>
+          <a href="#">Términos de uso</a>
+          <a href="politica.html">Política de privacidad</a>
+          <a href="#">Ayuda</a>
+        </div>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+        <div class="footer-copy">
+          &copy; 2025 MercApp. Todos los derechos reservados.
+        </div>
+      </div>
+    </footer>
+  </body>
+  </html>
