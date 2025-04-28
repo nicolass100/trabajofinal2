@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Admin - MercApp</title>
+  <link rel="stylesheet" href="estilos/styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="welcome-section">
+      <h2>¡Bienvenido Administrador!</h2>
+      <p>Inicia sesión para acceder al panel de administración de MercApp.</p>
+    </div>
+
+    <div class="login-section">
+      <h2>Iniciar Sesión Admin</h2>
+      <form id="login-form">
+        <div class="input-group">
+          <label for="usuario">Correo o nombre de usuario</label>
+          <input type="text" id="usuario" placeholder="Correo o usuario" required>
+        </div>
+        <div class="input-group">
+          <label for="contrasena">Contraseña</label>
+          <input type="password" id="contrasena" placeholder="Contraseña" required>
+        </div>
+        <button class="login-button" type="submit">Iniciar Sesión</button>
+    
+      </form>
+    </div>
+  </div>
+
+  <script type="module">
+    import { supabase } from './supabase-client.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('login-form');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const usuarioInput = document.getElementById('usuario').value.trim();
+        const contrasena = document.getElementById('contrasena').value.trim();
+
+        if (!usuarioInput || !contrasena) {
+          alert('Por favor, completa todos los campos.');
+          return;
+        }
+
+        const { data, error } = await supabase
+          .from('usuariosadmin')
+          .select('*')
+          .or(`email.eq.${usuarioInput},usuario.eq.${usuarioInput}`)
+          .eq('contrasena', contrasena)
+          .single();
+
+        if (error || !data) {
+          alert('❌ Usuario o contraseña incorrectos.');
+        } else {
+          alert(`✅ Bienvenido, ${data.nombre}`);
+          window.location.href = 'admin.html'; // Redirige al panel de administración
+        }
+      });
+    });
+  </script>
+</body>
+</html>

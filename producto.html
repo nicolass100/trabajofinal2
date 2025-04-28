@@ -234,6 +234,35 @@
       font-size: 0.9em;
       color: #f1f1f1;
     }
+    .icons {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .icons a {
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+    }
+    .icons a:hover {
+      background-color: rgba(255,255,255,0.1);
+      transform: translateY(-2px);
+    }
+
+    .icons a i {
+      transition: transform 0.3s ease;
+    }
+
+    .icons a:hover i {
+      transform: scale(1.1);
+    }
   </style>
 </head>
 <body>
@@ -248,17 +277,18 @@
       </div>
 
       <div class="icons">
-        <a href="login.html"><i class="fas fa-user"></i> Ingresar</a>
+        <a href="registro.html"><i class="fas fa-user"></i> Ingresar</a>
+        <a href="index.html"><i class="fas fa-user"></i> Iniciar sesión</a>
         <a href="#" class="cart-icon"><i class="fas fa-shopping-cart"></i></a>
       </div>
     </div>
 
     <nav>
-      <a href="header.html">Principal</a>
+      <a href="principal.html">Principal</a>
       <a href="producto.html">Productos</a>
       <a href="politica.html">Política & privacidad</a>
       <a href="nosotros.html">sobre nosotros</a>
-      <a href="addproduct.html">Agregar productos</a>
+      
     </nav>
   </header>
 

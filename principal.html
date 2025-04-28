@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Header - MercApp</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <style>
+  <style>
       * {
         margin: 0;
         padding: 0;
@@ -17,87 +17,87 @@
       }
 
       header {
-    background-color: #d4141a;
-    color: white;
-    padding: 15px 30px;
-    position: relative;
-    z-index: 1000;
-  }
+        background-color: #d4141a;
+        color: white;
+        padding: 15px 30px;
+        position: relative;
+        z-index: 1000;
+      }
 
-  .top-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
+      .top-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
 
-  .logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-    transition: transform 0.3s ease;
-    cursor: pointer;
-  }
+      .logo {
+        font-size: 1.8rem;
+        font-weight: bold;
+        transition: transform 0.3s ease;
+        cursor: pointer;
+      }
 
-  .logo:hover {
-    transform: scale(1.05);
-  }
+      .logo:hover {
+        transform: scale(1.05);
+      }
 
-  .nav-links {
-    display: flex;
-    gap: 20px;
-    transition: max-height 0.3s ease;
-  }
+      .nav-links {
+        display: flex;
+        gap: 20px;
+        transition: max-height 0.3s ease;
+      }
 
-  .nav-links a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    padding: 8px 12px;
-    border-radius: 10px;
-    transition: background 0.3s ease;
-  }
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        padding: 8px 12px;
+        border-radius: 10px;
+        transition: background 0.3s ease;
+      }
 
-  .nav-links a:hover {
-    background-color: rgba(255, 255, 255, 0.15);
-  }
+      .nav-links a:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+      }
 
-  .icons a {
-    margin-left: 15px;
-    color: white;
-    font-size: 1.2rem;
-    transition: transform 0.3s ease;
-  }
+      .icons a {
+        margin-left: 15px;
+        color: white;
+        font-size: 1.2rem;
+        transition: transform 0.3s ease;
+      }
 
-  .icons a:hover {
-    transform: scale(1.2);
-  }
+      .icons a:hover {
+        transform: scale(1.2);
+      }
 
-  .menu-toggle {
-    display: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-  }
+      .menu-toggle {
+        display: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
 
-  @media (max-width: 768px) {
-    .nav-links {
-      flex-direction: column;
-      width: 100%;
-      max-height: 0;
-      overflow: hidden;
-      background-color: #c11218;
-      border-radius: 10px;
-      margin-top: 10px;
-    }
+      @media (max-width: 768px) {
+        .nav-links {
+          flex-direction: column;
+          width: 100%;
+          max-height: 0;
+          overflow: hidden;
+          background-color: #c11218;
+          border-radius: 10px;
+          margin-top: 10px;
+        }
 
-    .nav-links.open {
-      max-height: 300px;
-      padding: 10px 0;
-    }
+        .nav-links.open {
+          max-height: 300px;
+          padding: 10px 0;
+        }
 
-    .menu-toggle {
-      display: block;
-    }
-  }
+        .menu-toggle {
+          display: block;
+        }
+      }
 
       .search-bar {
         flex: 1;
@@ -232,48 +232,47 @@
 
       /* Carrusel de imágenes */
       .carousel {
-        position: relative;
-        width: 1400px;
-        height: 600px;
-        margin: 30px auto; /* Centrado */
-        overflow: hidden;
-        border-radius: 15px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      }
+            position: relative;
+            width: 100%;
+            max-width: 1400px;
+            margin: 30px auto; /* Centrado */
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
 
-      .carousel-images {
-        display: flex;
-        transition: transform 0.5s ease-in-out;
-        height: 100%;
-      }
+        .carousel-images {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 100%; /* Ajuste para que ocupe todo el espacio del contenedor */
+        }
 
-      .carousel-images img {
-        width: 1400px;
-        height: 600px;
-        object-fit: cover;
-        flex-shrink: 0;
-      }
+        .carousel-images img {
+            width: 100%; /* Asegúrate que las imágenes ocupen el 100% del contenedor */
+            object-fit: cover;
+            flex-shrink: 0;
+        }
 
-      .carousel button {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background-color: rgba(0, 0, 0, 0.5);
-        color: white;
-        border: none;
-        padding: 10px;
-        cursor: pointer;
-        font-size: 2em;
-        z-index: 10;
-      }
+        .carousel button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 2em;
+            z-index: 10;
+        }
 
-      .prev {
-        left: 0;
-      }
+        .prev {
+            left: 0;
+        }
 
-      .next {
-        right: 0;
-      }
+        .next {
+            right: 0;
+        }
 
       /* Animación de pulsación para el carrito */
       @keyframes pulse {
@@ -337,6 +336,48 @@
         font-size: 0.9em;
         color: #f1f1f1;
       }
+      .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro con opacidad */
+            display: none; /* Ocultarlo por defecto */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        /* Estilos para el contenedor del mensaje */
+        .message-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            font-size: 20px;
+            color: #333;
+        }
+
+        /* Estilos para el botón de cierre */
+        .close-btn {
+            background-color: #f5c6cb;
+            border: none;
+            color: #721c24;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        .close-btn:hover {
+            background-color: #721c24;
+            color: #fff;
+        }
+
+        /* Estilo para el botón que activa el mensaje */
+        
     </style>
   </head>
   <body>
@@ -348,15 +389,14 @@
           <i class="fas fa-bars"></i>
         </div>
         <nav class="nav-links" id="navLinks">
-          <a href="header.html">Inicio</a>
+          <a href="principal.html">Inicio</a>
           <a href="producto.html">Productos</a>
           <a href="politica.html">Política</a>
           <a href="nosotros.html">Nosotros</a>
-          <a href="addproduct.html">Agregar</a>
         </nav>
         <div class="icons">
-          <a href="login.html" title="Ingresar"><i class="fas fa-user"></i></a>
-          <a href="#" title="Carrito"><i class="fas fa-shopping-cart"></i></a>
+        
+          <a href="carrito.html" title="Carrito"><i class="fas fa-shopping-cart"></i></a>
         </div>
       </div>
     </header>
@@ -392,39 +432,50 @@
       });
 
       // Carrusel de imágenes
-      let index = 0;
-      const images = document.querySelectorAll('.carousel-images img');
-      const totalImages = images.length;
 
-      const prevButton = document.querySelector('.prev');
-      const nextButton = document.querySelector('.next');
+    // Carrusel de imágenes
+    let index = 0;
+    const images = document.querySelectorAll('.carousel-images img');
+    const totalImages = images.length;
 
-      function changeImage() {
+    const prevButton = document.querySelector('.prev');
+    const nextButton = document.querySelector('.next');
+
+    function changeImage() {
         if (index >= totalImages) {
-          index = 0;
+            index = 0;
         } else if (index < 0) {
-          index = totalImages - 1;
+            index = totalImages - 1;
         }
 
         const offset = -index * 100;
         document.querySelector('.carousel-images').style.transform = `translateX(${offset}%)`;
-      }
+    }
 
-      prevButton.addEventListener('click', function() {
+    prevButton.addEventListener('click', function() {
         index--;
         changeImage();
-      });
+    });
 
-      nextButton.addEventListener('click', function() {
+    nextButton.addEventListener('click', function() {
         index++;
         changeImage();
-      });
+    });
 
-      // Cambiar la imagen automáticamente cada 3 segundos
-      setInterval(function() {
+    // Cambiar la imagen automáticamente cada 3 segundos
+    setInterval(function() {
         index++;
         changeImage();
-      }, 3000);
+    }, 3000);
+
+    function showOverlay(type) {
+            document.getElementById('overlay-' + type).style.display = "flex"; // Mostrar el overlay adecuado
+        }
+
+        // Función para cerrar el overlay correspondiente
+        function closeOverlay(type) {
+            document.getElementById('overlay-' + type).style.display = "none"; // Ocultar el overlay
+        }
     
     </script>
     <script type="module" src="supabase-client.js"></script>
@@ -434,11 +485,35 @@
       <div class="footer-container">
         <div class="footer-logo">🛒 MercApp</div>
         <div class="footer-links">
-          <a href="#">Contacto</a>
-          <a href="#">Términos de uso</a>
+          <a href="#" class="contact-link" onclick="showOverlay('contacto')">Contacto</a>
+          <a href="#" onclick="showOverlay('terminos')">Términos de uso</a>
           <a href="politica.html">Política de privacidad</a>
-          <a href="#">Ayuda</a>
-        </div>
+          <a href="#" onclick="showOverlay('ayuda')">Ayuda</a>
+      </div>
+  
+      <!-- Overlay para Contacto -->
+      <div id="overlay-contacto" class="overlay">
+          <div class="message-container">
+              <span>¿Tienes alguna pregunta o necesitas asistencia? Contáctanos para más información o para resolver cualquier inconveniente que puedas tener.</span><br>
+              <button class="close-btn" onclick="closeOverlay('contacto')">Cerrar</button>
+          </div>
+      </div>
+  
+      <!-- Overlay para Términos de Uso -->
+      <div id="overlay-terminos" class="overlay">
+          <div class="message-container">
+              <span>Al utilizar nuestro sitio web, aceptas nuestros <a href="terminos">Términos de Uso</a>. Por favor, léelos detenidamente antes de continuar.</span><br>
+              <button class="close-btn" onclick="closeOverlay('terminos')">Cerrar</button>
+          </div>
+      </div>
+  
+      <!-- Overlay para Ayuda -->
+      <div id="overlay-ayuda" class="overlay">
+          <div class="message-container">
+              <span>Si tienes dudas o necesitas ayuda adicional, por favor visita nuestra sección de ayuda o contacta con nosotros.</span><br>
+              <button class="close-btn" onclick="closeOverlay('ayuda')">Cerrar</button>
+          </div>
+      </div>
         <div class="footer-social">
           <a href="#"><i class="fab fa-facebook-f"></i></a>
           <a href="#"><i class="fab fa-instagram"></i></a>

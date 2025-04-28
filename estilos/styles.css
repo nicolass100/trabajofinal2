@@ -1,0 +1,140 @@
+/* General styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #ff4d4d;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  animation: fondoFade 10s infinite alternate ease-in-out;
+}
+
+@keyframes fondoFade {
+  0% { background-color: #ff4d4d; }     /* rojo suave */
+  50% { background-color: #b30000; }    /* rojo oscuro */
+  100% { background-color: #ff1a1a; }   /* rojo vivo */
+}
+
+/* Neon Container */
+.container {
+  display: flex;
+  width: 80%;
+  max-width: 900px;
+  height: 500px;
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+  border: 3px solid #b30000;
+}
+
+/* Login Section */
+.login-section {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #fff5f5;
+}
+
+.login-section h2 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #b30000;
+  text-align: center;
+}
+
+.input-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.input-group input {
+  padding: 10px;
+  font-size: 1rem;
+  border: 2px solid #b30000;
+  border-radius: 5px;
+  background: white;
+  color: #000;
+  outline: none;
+  transition: 0.3s;
+}
+
+.input-group input:focus {
+  border-color: #ff1a1a;
+  box-shadow: 0 0 8px #ff6666;
+}
+
+.login-button {
+  padding: 10px;
+  font-size: 1rem;
+  background: #b30000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-button:hover {
+  background: #ff1a1a;
+  box-shadow: 0 0 10px #ff9999;
+}
+
+.signup-text {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #555;
+  text-align: center;
+}
+
+.signup-text a {
+  color: #b30000;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.signup-text a:hover {
+  text-decoration: underline;
+  color: #ff1a1a;
+}
+
+/* Welcome Section */
+.welcome-section {
+  flex: 1;
+  background: #780000;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  text-align: center;
+}
+
+.welcome-section h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.welcome-section p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: rgb(255, 255, 255);
+}

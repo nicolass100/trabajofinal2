@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detalle del Producto</title>
+  <link rel="stylesheet" href="estilos/detalle.css" />
+</head>
+<body>
+  <header>
+      <div class="top-bar">
+        <div class="logo">🛒 MercApp</div>
+        <div class="menu-toggle" id="menuToggle">
+          <i class="fas fa-bars"></i>
+        </div>
+        <nav class="nav-links" id="navLinks">
+          <a href="principal.html">Inicio</a>
+          <a href="producto.html">Productos</a>
+          <a href="politica.html">Política</a>
+          <a href="nosotros.html">Nosotros</a>
+        </nav>
+        <div class="icons">
+          <a href="login.html" title="Ingresar"><i class="fas fa-user"></i></a>
+          <a href="#" title="Carrito"><i class="fas fa-shopping-cart"></i></a>
+        </div>
+      </div>
+    </header>
+<div id="detalle-producto" class="contenedor-detalle">
+  <p>Cargando producto...</p>
+</div>
+
+<!-- Contenedor para productos aleatorios -->
+<div id="productos-aleatorios" class="contenedor-aleatorios">
+  <h2>Productos que podrían interesarte</h2>
+  <div class="productos-grid">
+    <p>Cargando productos...</p>
+  </div>
+</div>
+
+<!-- Importas el cliente Supabase desde tu archivo -->
+<script type="module">
+  import { supabase } from './supabase-client.js'
+
+  const params = new URLSearchParams(window.location.search)
+  const id = params.get('id')
+
+  // Función para obtener el producto actual
+  async function obtenerProducto() {
+    const { data, error } = await supabase
+      .from('productos')
+      .select('*')
+      .eq('id', id)
+      .single()
+
+    if (error || !data) {
+      document.getElementById('detalle-producto').innerHTML = '<p>Error al cargar producto</p>'
+      return
+    }
+
+    const productoHTML = `
+    <div class="producto-detalle">
+          <img src="${data.imagen_url}" alt="${data.nombre}" style="width: 100%; max-height: 400px; object-fit: contain; background: #f9f9f9;">
+          <div class="producto-detalle-info">
+          <h1>${data.nombre}</h1>
+          <p>${data.descripcion}</p>
+          <p><strong>Precio:</strong> S/ ${data.precio}</p>
+          <div class="botones">
+            <button class="btn-comprar">Comprar</button>
+            <button class="btn-carrito" onclick="añadirAlCarrito('${data.id}', '${data.nombre}', '${data.imagen_url}', ${data.precio})">Añadir al carrito</button>
+
+          </div>
+          <a href="producto.html">← Volver</a>
+          </div>
+     </div>
+    `
+    document.getElementById('detalle-producto').innerHTML = productoHTML
+  }
+
+  function añadirAlCarrito(id, nombre, imagen_url, precio) {
+    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    const producto = { id, nombre, imagen_url, precio, cantidad: 1 };
+
+    // Verificar si el producto ya existe en el carrito
+    const productoExistente = carrito.find(item => item.id === id);
+
+    if (productoExistente) {
+      productoExistente.cantidad++;
+    } else {
+      carrito.push(producto);
+    }
+
+    // Guardar el carrito actualizado en localStorage
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    
+    // Redirigir al carrito
+    window.location.href = 'carrito.html';
+  }
+  // Función para obtener productos aleatorios
+  async function obtenerProductosAleatorios() {
+    const { data, error } = await supabase
+      .from('productos')
+      .select('*')
+
+    if (error || !data) {
+      document.querySelector('#productos-aleatorios .productos-grid').innerHTML = '<p>Error al cargar productos</p>'
+      return
+    }
+
+    // Seleccionar 4 productos aleatorios
+    const productosAleatorios = data
+      .filter(producto => producto.id !== id) // Excluir el producto actual
+      .sort(() => 0.5 - Math.random()) // Mezclar aleatoriamente
+      .slice(0, 6) // Tomar los primeros 4
+
+    const productosHTML = productosAleatorios.map(producto => `
+      <div class="producto-item">
+        <img src="${producto.imagen_url}" alt="${producto.nombre}" />
+        <h3>${producto.nombre}</h3>
+        <p>S/ ${producto.precio}</p>
+        <a href="detalle.html?id=${producto.id}">Ver más</a>
+      </div>
+    `).join('')
+
+    document.querySelector('#productos-aleatorios .productos-grid').innerHTML = productosHTML
+  }
+
+
+  obtenerProducto()
+  obtenerProductosAleatorios()
+  window.añadirAlCarrito = añadirAlCarrito;
+</script>
+<footer>
+    <div class="footer-container">
+      <div class="footer-logo">🛒 MercApp</div>
+      <div class="footer-links">
+        <a href="#">Contacto</a>
+        <a href="#">Términos de uso</a>
+        <a href="politica.html">Política de privacidad</a>
+        <a href="#">Ayuda</a>
+      </div>
+      <div class="footer-social">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
+      <div class="footer-copy">
+        &copy; 2025 MercApp. Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

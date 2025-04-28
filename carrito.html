@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Carrito de Compras</title>
+  <link rel="stylesheet" href="estilos/diseñopagina.css">
+</head>
+<body>
+  <header>
+    <div class="top-bar">
+      <div class="logo">Mi Tienda</div>
+      <div class="nav-links">
+        <a href="#">Inicio</a>
+        <a href="#">Productos</a>
+        <a href="#">Contacto</a>
+      </div>
+      <div class="icons">
+        <a href="#"><i class="fas fa-shopping-cart"></i> Carrito</a>
+      </div>
+      <div class="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <h1>Tu Carrito</h1>
+    <div id="carrito-contenido">
+      <p>Cargando carrito...</p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-logo">Mi Tienda</div>
+      <div class="footer-links">
+        <a href="#">Política de Privacidad</a>
+        <a href="#">Términos y Condiciones</a>
+      </div>
+      <div class="footer-social">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+      <div class="footer-copy">© 2025 Mi Tienda. Todos los derechos reservados.</div>
+    </div>
+  </footer>
+
+  <script>
+    function mostrarCarrito() {
+      const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+      if (carrito.length === 0) {
+        document.getElementById('carrito-contenido').innerHTML = '<p>Tu carrito está vacío.</p>';
+        return;
+      }
+
+      let carritoHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Imagen</th>
+              <th>Precio</th>
+              <th>Cantidad</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+
+      carrito.forEach(producto => {
+        carritoHTML += `
+          <tr>
+            <td>${producto.nombre}</td>
+            <td><img src="${producto.imagen_url}" alt="${producto.nombre}" style="width: 50px;"></td>
+            <td>S/ ${producto.precio}</td>
+            <td>${producto.cantidad}</td>
+            <td>S/ ${(producto.precio * producto.cantidad).toFixed(2)}</td>
+          </tr>
+        `;
+      });
+
+      carritoHTML += `
+          </tbody>
+        </table>
+      `;
+
+      document.getElementById('carrito-contenido').innerHTML = carritoHTML;
+    }
+
+    mostrarCarrito();
+  </script>
+</body>
+</html>

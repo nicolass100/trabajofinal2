@@ -356,6 +356,14 @@
     max-width: 500px;
     line-height: 1.5em;
     }
+    .cart-icon:hover {
+      animation: pulse 0.5s ease;
+    }
+    @keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
   </style>
 </head>
 <body>
@@ -371,12 +379,12 @@
     
           <div class="icons">
             <a href="#"><i class="fas fa-user"></i> Ingresar</a>
-            <a href="#" class="cart-icon"><i class="fas fa-shopping-cart"></i></a>
+            <a href="#" class="cart-icon">Carrito<i class="fas fa-shopping-cart">🛒</i></a>
           </div>
         </div>
     
         <nav>
-          <a href="header.html">Todos los productos</a>
+          <a href="principal.html">Todos los productos</a>
           <a href="producto.html">productos</a>
           <a href="politica.html">Política & privacidad</a>
           <a href="nosotros.html">sobre nosotros</a>

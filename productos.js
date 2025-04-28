@@ -56,12 +56,13 @@ function mostrarProductos(productos) {
   productos.forEach(producto => {
     const productoHTML = `
       <div style="background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); overflow: hidden;">
-        <img src="${producto.imagen_url || '/api/placeholder/400/320'}" alt="${producto.nombre}" style="width: 100%; height: 200px; object-fit: cover;">
+        <img src="${producto.imagen_url || '/api/placeholder/400/320'}" alt="${producto.nombre}" style="width: 100%; height: 200px; object-fit: contain; background: #f9f9f9;">
         <div style="padding: 15px;">
           <h3 style="font-size: 1.2em; margin-bottom: 10px;">${producto.nombre}</h3>
           <p style="color: #555;">${producto.descripcion}</p>
           <p style="color: #d4141a; font-weight: bold; margin-top: 10px;">S/ ${producto.precio.toFixed(2)}</p>
-          <button style="margin-top: 10px; background: #d4141a; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Ver más</button>
+          <button onclick="location.href='detalle.html?id=${producto.id}'" 
+        style="margin-top: 10px; background: #d4141a; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Ver más</button>
         </div>
       </div>
     `;

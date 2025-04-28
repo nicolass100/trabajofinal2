@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neon Login</title>
+  <link rel="stylesheet" href="estilos/styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="login-section">
+      <h2>Inicia sesión</h2>
+      <form id="login-form">
+        <div class="input-group">
+          <label for="username">Nombre de usuario</label>
+          <input type="text" id="username" placeholder="Enter your username" required>
+        </div>
+        <div class="input-group">
+          <label for="password">Contraseña</label>
+          <input type="password" id="password" placeholder="Enter your password" required>
+        </div>
+        <button class="login-button" type="submit">Login</button>
+        <p class="signup-text">No tienes una cuenta? <a href="registro.html">Registrate</a></p>
+        <p class="signup-text">Eres administador? <a href="loginadmin.html  ">Inicia sesión</a></p>
+      </form>
+    </div>
+    <div class="welcome-section">
+      <h2>BIENVENIDO</h2>
+      <p>Unete a nuestra tienda digital y descubre productos de calidad y a bajo costo, ademas de la ofertas increibles que podras encontrar.</p>
+    </div>
+  </div>
+
+  <!-- Script con type="module" para permitir import -->
+  <script type="module">
+    import { supabase } from './supabase-client.js';
+  
+    // Verificar conexión a la base de datos
+    (async () => {
+      const { data, error } = await supabase.from('usuarios').select('id').limit(1);
+      if (error) {
+        console.error('❌ No se pudo conectar con la base de datos:', error.message);
+      } else {
+        console.log('✅ Conexión exitosa a Supabase');
+      }
+    })();
+  
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('login-form');
+  
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+  
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
+  
+        if (!username || !password) {
+          alert('Por favor, complete todos los campos.');
+          return;
+        }
+  
+        try {
+          const { data, error } = await supabase
+            .from('usuarios')
+            .select('*')
+            .eq('usuario', username)
+            .eq('contrasena', password)
+            .single();
+  
+          if (error || !data) {
+            alert('Usuario o contraseña incorrectos.');
+          } else {
+            alert(`¡Bienvenido, ${data.nombre}!`);
+            window.location.href = 'principal.html';
+          }
+        } catch (err) {
+          console.error('Error al conectar con Supabase:', err);
+          alert('Hubo un error al iniciar sesión.');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

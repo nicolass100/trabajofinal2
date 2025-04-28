@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro Admin - MercApp</title>
+  <link rel="stylesheet" href="estilos/styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="welcome-section">
+      <h2>¡Bienvenido Administrador!</h2>
+      <p>Regístrate para acceder al panel de administración de MercApp.</p>
+    </div>
+
+    <div class="login-section">
+      <h2>Crear Cuenta Admin</h2>
+      <form id="registro-form">
+        <div class="input-group">
+          <label for="nombre">Nombre completo</label>
+          <input type="text" id="nombre" placeholder="Ingresa tu nombre completo" required>
+        </div>
+        <div class="input-group">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" placeholder="Ingresa tu correo electrónico" required>
+        </div>
+        <div class="input-group">
+          <label for="usuario">Nombre de usuario</label>
+          <input type="text" id="usuario" placeholder="Ingresa un nombre de usuario" required>
+        </div>
+        <div class="input-group">
+          <label for="contrasena">Contraseña</label>
+          <input type="password" id="contrasena" placeholder="Ingresa tu contraseña" required>
+        </div>
+        <button class="login-button" type="submit">Registrarse</button>
+        <p class="signup-text">¿Ya eres administrador? <a href="loginadmin.html">Inicia sesión</a></p>
+      </form>
+    </div>
+  </div>
+
+  <script type="module">
+    import { supabase } from './supabase-client.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('registro-form');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const nombre = document.getElementById('nombre').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const usuario = document.getElementById('usuario').value.trim();
+        const contrasena = document.getElementById('contrasena').value.trim();
+
+        // Imagen de perfil por defecto
+        const imagen = 'https://i.imgur.com/some-default-image.png'; // Puedes cambiar esta URL por otra imagen pública
+
+        if (!nombre || !email || !usuario || !contrasena) {
+          alert('Por favor, complete todos los campos.');
+          return;
+        }
+
+        try {
+          const { data, error } = await supabase
+            .from('usuariosadmin')
+            .insert([{ nombre, email, usuario, contrasena, imagen }]);
+
+          if (error) {
+            alert('Error al registrar administrador: ' + error.message);
+          } else {
+            alert('¡Registro exitoso, administrador!');
+            window.location.href = 'loginadmin.html'; // Redirige al login de admin
+          }
+        } catch (err) {
+          console.error('Error al registrar administrador:', err);
+          alert('Hubo un error al registrarse como administrador.');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro - MercApp</title>
+  <link rel="stylesheet" href="estilos/styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="welcome-section">
+      <h2>¡Bienvenido a MercApp!</h2>
+      <p>Si no tienes cuenta, por favor regístrate para comenzar a disfrutar de nuestros servicios.</p>
+    </div>
+
+    <div class="login-section">
+      <h2>Crear Cuenta</h2>
+      <form id="registro-form">
+        <div class="input-group">
+          <label for="nombre">Nombre completo</label>
+          <input type="text" id="nombre" placeholder="Ingresa tu nombre completo" required>
+        </div>
+        <div class="input-group">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" placeholder="Ingresa tu correo electrónico" required>
+        </div>
+        <div class="input-group">
+          <label for="usuario">Nombre de usuario</label>
+          <input type="text" id="usuario" placeholder="Ingresa un nombre de usuario" required>
+        </div>
+        <div class="input-group">
+          <label for="contrasena">Contraseña</label>
+          <input type="password" id="contrasena" placeholder="Ingresa tu contraseña" required>
+        </div>
+        <button class="login-button" type="submit">Registrarse</button>
+        <p class="signup-text">¿Ya tienes cuenta? <a href="index.html">Inicia sesión</a></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Script con type="module" para permitir import -->
+  <script type="module">
+    import { supabase } from './supabase-client.js';
+  
+    // Verificar conexión a la base de datos
+    (async () => {
+      const { data, error } = await supabase.from('usuarios').select('id').limit(1);
+      if (error) {
+        console.error('❌ No se pudo conectar con la base de datos:', error.message);
+      } else {
+        console.log('✅ Conexión exitosa a Supabase');
+      }
+    })();
+  
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('registro-form');
+  
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+  
+        const nombre = document.getElementById('nombre').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const usuario = document.getElementById('usuario').value.trim();
+        const contrasena = document.getElementById('contrasena').value.trim();
+  
+        if (!nombre || !email || !usuario || !contrasena) {
+          alert('Por favor, complete todos los campos.');
+          return;
+        }
+  
+        try {
+          const { data, error } = await supabase
+            .from('usuarios')
+            .insert([{ nombre, email, usuario, contrasena }]);
+  
+          if (error) {
+            alert('Error al registrar usuario: ' + error.message);
+          } else {
+            alert('¡Registro exitoso! Bienvenido.');
+            window.location.href = 'index.html'; // Redirige al login
+          }
+        } catch (err) {
+          console.error('Error al registrar usuario:', err);
+          alert('Hubo un error al registrarse.');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
