@@ -1,5 +1,9 @@
 🛒 MercApp: Tu Minimarket Inteligente
 “En un mundo donde el comercio se transforma, MercApp llega para digitalizar, simplificar y potenciar la gestión de tu negocio.”
+integrantes del proyecto.
+-Nicolas Ascurra.
+-Joaquin Sebastian.
+-Wilson Romucho.
 
 — Manifiesto del Proyecto
 
